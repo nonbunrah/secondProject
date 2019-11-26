@@ -155,7 +155,7 @@ app.put('/api/locations/:id', (req, res) => {
 	})
 });
 
-// Delete person
+// Delete location
 app.delete('/api/locations/:id', (req, res) => {
 	const locationId = req.params.id
 	const getLocation = `DELETE FROM tblLocations WHERE tblLocations.oid = ?`;
@@ -168,6 +168,79 @@ app.delete('/api/locations/:id', (req, res) => {
 			console.log("Location was successfully deleted")
 			res.status(200).json({message: "Delete successfully!"});
 	})
+});
+
+// -------------------------------------------------------------------
+// PLACES TRAVELED ROUTES
+// -------------------------------------------------------------------
+
+//Retrieve places traveled
+app.get('/api/traveled', (req, res) => {
+	console.log("AA")
+	const getTraveled = `SELECT oid, * FROM tblTraveled`;
+
+	database.all(getTraveled, (error, results) => {
+		if (error) {
+			console.log(new Error("Could not pull up places traveled"), error);
+			res.sendStatus(500);
+		}
+		console.log("No error")
+		res.status(200).json(results);
+	})
+})
+
+// Create association between people and location (places traveled)
+app.post('/api/traveled', (req, res) => {
+	const personId = parseInt(req.body.people_ID);
+	const locationId = parseInt(req.body.location_ID);
+	const start = req.body.start_date_traveled
+	const end = req.body.end_date_traveled
+	const insertString = "INSERT INTO tblTraveled VALUES (?, ?, ?, ?)";
+
+	database.run(insertString, [personId, locationId, start, end], error => {
+		if (error) {
+			console.log(error)
+			res.sendStatus(500);
+		} else {
+			res.sendStatus(200)
+		}
+	})
+})
+
+// Retrieve a person's traveled locations using their ID
+app.get('/api/traveled/people/:id', (req, res) => {
+  const peopleId = req.params.id;
+  const queryString = `select name, country, city, start_date_traveled, end_date_traveled from tblTraveled 
+  join tblPeople on tblPeople.oid = tblTraveled.people_ID 
+  join tblLocations on tblLocations.oid = tblTraveled.location_ID 
+  WHERE people_id = ?`;
+
+  database.all(queryString, [peopleId], (error, results) => {
+      if (error) {
+        console.log(error);
+        res.sendStatus(500);
+    } else { 
+        res.status(200).json(results)
+    }
+  })
+});
+
+// Retrieve a location that people have traveled to using the location ID
+app.get('/api/traveled/locations/:id', (req, res) => {
+  const locationId = req.params.id;
+  const queryString = `select name, country, city, start_date_traveled, end_date_traveled from tblTraveled 
+  join tblPeople on tblPeople.oid = tblTraveled.people_ID 
+  join tblLocations on tblLocations.oid = tblTraveled.location_ID 
+  WHERE location_id = ?`;
+
+  database.all(queryString, [locationId], (error, results) => {
+      if (error) {
+        console.log(error);
+        res.sendStatus(500);
+    } else { 
+        res.status(200).json(results)
+    }
+  })
 });
 
 // Start Server
