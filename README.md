@@ -11,10 +11,12 @@ This project is an API that I have created around people and they places they ha
 I wanted to use the backend knowledge that I was taught to create an API. I created this API so that I can see where friends of mine have gone and when. With this information, if I choose to visit the same place(s), I'll know who to ask! 
 
 ## People
+<b> GET /api/people/ </b> 
 GET Request will retrieve all records in the people table including their row ID
 
-<b> GET /api/people/ </b> 
 ```
+Response:
+
 	{
         "rowid": 1,
         "name": "Bob",
@@ -31,46 +33,45 @@ GET Request will retrieve all records in the people table including their row ID
         "date_of_birth": null
     }
 ```
-GET Request by ID will retrieve the record that matches that person's row ID
-
 <b> GET /api/people/1/ </b> 
+GET Request by ID will retrieve the record that matches that person's row ID
 ```
+Response: 
 	{
         "rowid": 1,
         "name": "Bob",
         "date_of_birth": "1/1/01"
     }
  ```
-
-POST Request will let you create a new record and an ID will also automatically be created via row ID
-
 <b> POST /api/people/ </b> 
+POST Request will let you create a new record and an ID will also automatically be created via row ID
 ```
+Input: 
+
 	{
         "name": "insert string",
         "date_of_birth": "insert string"
     }
  ```
-
-PUT Request will let you update an existing record by its ID
-
 <b> PUT /api/people/:id/ </b> 
+PUT Request will let you update an existing record by its ID
 ```
+Input: 
+
 	{
         "name": "updated string",
         "date_of_birth": "updated string"
     }
  ```
-
+<b> DELETE /api/people/:id/ </b> 
 DELETE Request will let you delete an existing record by its ID
 
-<b> DELETE /api/people/:id/ </b> 
-
 ## Locations
-GET Request will retrieve all records in the locations table including their row ID
-
 <b> GET /api/locations/ </b> 
+GET Request will retrieve all records in the locations table including their row ID
 ```
+Response: 
+
 	{
 		"rowid":  1,
 		"country":  "France",
@@ -87,46 +88,46 @@ GET Request will retrieve all records in the locations table including their row
 		"city":  "Gogogogo"
 	},
 ```
-GET Request by ID will retrieve the record that matches that location's row ID
-
 <b> GET /api/locations/:id/ </b> 
+GET Request by ID will retrieve the record that matches that location's row ID
 ```
+Response: 
+
 	{
 		"rowid":  1,
 		"country":  "France",
 		"city":  "Paris"
 	},
  ```
-
-POST Request will let you create a new record and an ID will also automatically be created via row ID
-
 <b> POST /api/locations/ </b> 
+POST Request will let you create a new record and an ID will also automatically be created via row ID
 ```
+Input: 
+
 	{
         "country": "insert string",
         "city": "insert string"
     }
  ```
-
-PUT Request will let you update an existing record by its ID
-
 <b> PUT /api/locations/:id/ </b> 
+PUT Request will let you update an existing record by its ID
 ```
+Input: 
+
 	{
         "country": "updated string",
         "city": "updated string"
     }
  ```
-
+<b> DELETE /api/locations/:id/ </b> 
 DELETE Request will let you delete an existing record by its ID
 
-<b> DELETE /api/locations/:id/ </b> 
-
 ## Traveled
-GET Request will retrieve all records in the traveled table including their row ID
-
 <b> GET /api/traveled/ </b> 
+GET Request will retrieve all records in the traveled table including their row ID
 ```
+Response: 
+
 	{
 		"rowid":  1,
 		"name":  "Joe",
@@ -152,10 +153,11 @@ GET Request will retrieve all records in the traveled table including their row 
 		"end_date_traveled":  "02/02/02"
 	}
 ```
-This GET Request will retrieve a person's traveled locations using their ID
-
 <b> GET /api/traveled/people/:id </b> 
+This GET Request will retrieve a person's traveled locations using their ID
 ```
+Response: 
+
 	{
 		"rowid":  1,
 		"name":  "Joe",
@@ -173,11 +175,11 @@ This GET Request will retrieve a person's traveled locations using their ID
 		"end_date_traveled":  "12/05/04"
 	},
  ```
- 
-This GET Request will retrieve a location that people have traveled to using the location ID
-
 <b> GET /api/traveled/locations/:id </b> 
+This GET Request will retrieve a location that people have traveled to using the location ID
 ```
+Response:
+
 	{
 		"rowid":  1,
 		"name":  "Joe",
@@ -195,11 +197,11 @@ This GET Request will retrieve a location that people have traveled to using the
 		"end_date_traveled":  "10/03/02"
 	}
  ```
-
-POST Request will let you create a new record that relates a person to a place they visited and an ID will also automatically be created via row ID
-
 <b> POST /api/people/ </b> 
+POST Request will let you create a new record that relates a person to a place they visited and an ID will also automatically be created via row ID
 ```
+Input: 
+
 	{
         "people_ID": insert integer,
         "location_ID": insert integer,
