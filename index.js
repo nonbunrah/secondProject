@@ -176,15 +176,16 @@ app.delete('/api/locations/:id', (req, res) => {
 
 //Retrieve places traveled
 app.get('/api/traveled', (req, res) => {
-	console.log("AA")
-	const getTraveled = `SELECT oid, * FROM tblTraveled`;
+	const getTraveled = `select tblTraveled.oid, name, country, city, start_date_traveled, end_date_traveled from tblTraveled 
+  join tblPeople on tblPeople.oid = tblTraveled.people_ID 
+  join tblLocations on tblLocations.oid = tblTraveled.location_ID`;
+	//const getTraveled = `SELECT oid, * FROM tblTraveled`;
 
 	database.all(getTraveled, (error, results) => {
 		if (error) {
 			console.log(new Error("Could not pull up places traveled"), error);
 			res.sendStatus(500);
 		}
-		console.log("No error")
 		res.status(200).json(results);
 	})
 })
