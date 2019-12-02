@@ -224,6 +224,23 @@ Input:
         "end_date_traveled": "insert string"
 	}
  ```
+<b> PUT /api/traveled/:id/ </b> 
 
+PUT Request will let you update an existing record by its the traveled entry's row ID
+
+```
+Input: 
+
+{
+        "people_ID": insert integer,
+        "location_ID": insert integer,
+        "start_date_traveled": "insert string",
+        "end_date_traveled": "insert string"
+}
+```
+
+<b> DELETE /api/traveled/:id/ </b> 
+
+DELETE Request will let you delete an existing record by its row ID
 
 --RJ

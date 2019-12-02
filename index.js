@@ -190,6 +190,24 @@ app.get('/api/traveled', (req, res) => {
 	})
 })
 
+//Retrieve place traveled based on row ID
+app.get('/api/traveled/:id', (req, res) => {
+  const traveledId = req.params.id;
+  const queryString = `select tblTraveled.oid, name, country, city, start_date_traveled, end_date_traveled from tblTraveled 
+  join tblPeople on tblPeople.oid = tblTraveled.people_ID 
+  join tblLocations on tblLocations.oid = tblTraveled.location_ID 
+  WHERE tblTraveled.oid = ?`;
+
+  database.all(queryString, [traveledId], (error, results) => {
+      if (error) {
+        console.log(error);
+        res.sendStatus(500);
+    } else { 
+        res.status(200).json(results)
+    }
+  })
+});
+
 // Create association between people and location (places traveled)
 app.post('/api/traveled', (req, res) => {
 	const personId = parseInt(req.body.people_ID);
@@ -242,6 +260,39 @@ app.get('/api/traveled/locations/:id', (req, res) => {
         res.status(200).json(results)
     }
   })
+});
+
+//Delete an existing traveled entry
+app.delete('/api/traveled/:id', (req, res) => {
+	const traveledId = req.params.id
+	const getTraveled = `DELETE FROM tblTraveled WHERE tblTraveled.oid = ?`;
+
+	database.all(getTraveled, [traveledId], (error, results) => {
+		if (error) {
+			console.log(new Error('Could not delete traveled entry'), error);
+			res.sendStatus(500)
+		}
+			console.log("Traveled entry was successfully deleted")
+			res.status(200).json({message: "Delete successfully!"});
+	})
+});
+
+//Update an already existing traveled entry - IN PROGRESS
+app.put('/api/traveled/:id', (req, res) => {
+	const traveledId = parseInt(req.params.id);
+	const queryHelper = Object.keys(req.body).map(element => `${ element.toUpperCase() } = ?`);
+	const updateOneTraveled = `UPDATE tblTraveled SET ${queryHelper.join(', ')} WHERE tblTraveled.oid = ?`;
+	const queryValues = [...Object.values(req.body), traveledId];
+
+	database.run(updateOneTraveled, queryValues, function (error) {
+		if (error) {
+			console.log(new Error('Could not update traveled entry'), error);
+			res.sendStatus(500);
+		} else {
+			console.log(`Traveled with ID ${traveledId} was successfully updated`);
+			res.sendStatus(200);
+		}
+	})
 });
 
 // Start Server
