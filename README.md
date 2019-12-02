@@ -12,6 +12,7 @@ I wanted to use the backend knowledge that I was taught to create an API. I crea
 
 ## People
 <b> GET /api/people/ </b> 
+
 GET Request will retrieve all records in the people table including their row ID
 
 ```
@@ -34,6 +35,7 @@ Response:
     }
 ```
 <b> GET /api/people/1/ </b> 
+
 GET Request by ID will retrieve the record that matches that person's row ID
 ```
 Response: 
@@ -44,6 +46,7 @@ Response:
     }
  ```
 <b> POST /api/people/ </b> 
+
 POST Request will let you create a new record and an ID will also automatically be created via row ID
 ```
 Input: 
@@ -54,6 +57,7 @@ Input:
     }
  ```
 <b> PUT /api/people/:id/ </b> 
+
 PUT Request will let you update an existing record by its ID
 ```
 Input: 
@@ -64,10 +68,12 @@ Input:
     }
  ```
 <b> DELETE /api/people/:id/ </b> 
+
 DELETE Request will let you delete an existing record by its ID
 
 ## Locations
 <b> GET /api/locations/ </b> 
+
 GET Request will retrieve all records in the locations table including their row ID
 ```
 Response: 
@@ -89,6 +95,7 @@ Response:
 	},
 ```
 <b> GET /api/locations/:id/ </b> 
+
 GET Request by ID will retrieve the record that matches that location's row ID
 ```
 Response: 
@@ -100,6 +107,7 @@ Response:
 	},
  ```
 <b> POST /api/locations/ </b> 
+
 POST Request will let you create a new record and an ID will also automatically be created via row ID
 ```
 Input: 
@@ -110,6 +118,7 @@ Input:
     }
  ```
 <b> PUT /api/locations/:id/ </b> 
+
 PUT Request will let you update an existing record by its ID
 ```
 Input: 
@@ -120,10 +129,12 @@ Input:
     }
  ```
 <b> DELETE /api/locations/:id/ </b> 
+
 DELETE Request will let you delete an existing record by its ID
 
 ## Traveled
 <b> GET /api/traveled/ </b> 
+
 GET Request will retrieve all records in the traveled table including their row ID
 ```
 Response: 
@@ -154,6 +165,7 @@ Response:
 	}
 ```
 <b> GET /api/traveled/people/:id </b> 
+
 This GET Request will retrieve a person's traveled locations using their ID
 ```
 Response: 
@@ -176,6 +188,7 @@ Response:
 	},
  ```
 <b> GET /api/traveled/locations/:id </b> 
+
 This GET Request will retrieve a location that people have traveled to using the location ID
 ```
 Response:
@@ -198,6 +211,7 @@ Response:
 	}
  ```
 <b> POST /api/people/ </b> 
+
 POST Request will let you create a new record that relates a person to a place they visited and an ID will also automatically be created via row ID
 ```
 Input: 
