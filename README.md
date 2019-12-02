@@ -34,11 +34,12 @@ Response:
         "date_of_birth": null
     }
 ```
-<b> GET /api/people/1/ </b> 
+<b> GET /api/people/:id/ </b> 
 
 GET Request by ID will retrieve the record that matches that person's row ID
 ```
 Response: 
+
 	{
         "rowid": 1,
         "name": "Bob",
