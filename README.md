@@ -17,17 +17,17 @@ GET Request will retrieve all records in the people table including their row ID
 ```
 	{
         "rowid": 1,
-        "name": "Joe Mama",
+        "name": "Bob",
         "date_of_birth": "1/1/01"
     },
     {
         "rowid": 2,
-        "name": "Hugh Jass",
+        "name": "Joe",
         "date_of_birth": "2/2/02"
     },
     {
         "rowid": 3,
-        "name": "Jenna Talia",
+        "name": "Bill",
         "date_of_birth": null
     }
 ```
@@ -37,7 +37,7 @@ GET Request by ID will retrieve the record that matches that person's row ID
 ```
 	{
         "rowid": 1,
-        "name": "Joe Mama",
+        "name": "Bob",
         "date_of_birth": "1/1/01"
     }
  ```
@@ -74,12 +74,12 @@ GET Request will retrieve all records in the locations table including their row
 	{
 		"rowid":  1,
 		"country":  "France",
-		"city":  "Condom"
+		"city":  "Paris"
 	},
 	{
 		"rowid":  2,
 		"country":  "Canada",
-		"city":  "Pilot Butte"
+		"city":  "Vancouver"
 	},
 	{
 		"rowid":  3,
@@ -94,7 +94,7 @@ GET Request by ID will retrieve the record that matches that location's row ID
 	{
 		"rowid":  1,
 		"country":  "France",
-		"city":  "Condom"
+		"city":  "Paris"
 	},
  ```
 
@@ -129,7 +129,7 @@ GET Request will retrieve all records in the traveled table including their row 
 ```
 	{
 		"rowid":  1,
-		"name":  "RJ",
+		"name":  "Joe",
 		"country":  "France",
 		"city":  "Paris",
 		"start_date_traveled":  "02/02/01",
@@ -137,7 +137,7 @@ GET Request will retrieve all records in the traveled table including their row 
 	},
 	{
 		"rowid":  2,
-		"name":  "Todd",
+		"name":  "Bob",
 		"country":  "Japan",
 		"city":  "Tokyo",
 		"start_date_traveled":  "12/02/17",
@@ -145,9 +145,9 @@ GET Request will retrieve all records in the traveled table including their row 
 	},
 	{
 		"rowid":  3,
-		"name":  "Jason",
-		"country":  "England",
-		"city":  "London",
+		"name":  "Bill",
+		"country":  "Madagascar",
+		"city":  "Gogogogo",
 		"start_date_traveled":  "01/01/01",
 		"end_date_traveled":  "02/02/02"
 	}
@@ -158,7 +158,7 @@ This GET Request will retrieve a person's traveled locations using their ID
 ```
 	{
 		"rowid":  1,
-		"name":  "RJ",
+		"name":  "Joe",
 		"country":  "France",
 		"city":  "Paris",
 		"start_date_traveled":  "02/02/01",
@@ -166,9 +166,9 @@ This GET Request will retrieve a person's traveled locations using their ID
 	}, 
 	{
 		"rowid":  4,
-		"name":  "RJ",
-		"country":  "England",
-		"city":  "London",
+		"name":  "Joe",
+		"country":  "Madagascar",
+		"city":  "Gogogogo",
 		"start_date_traveled":  "11/03/04",
 		"end_date_traveled":  "12/05/04"
 	},
@@ -180,7 +180,7 @@ This GET Request will retrieve a location that people have traveled to using the
 ```
 	{
 		"rowid":  1,
-		"name":  "RJ",
+		"name":  "Joe",
 		"country":  "France",
 		"city":  "Paris",
 		"start_date_traveled":  "02/02/01",
@@ -188,7 +188,7 @@ This GET Request will retrieve a location that people have traveled to using the
 	},
 	{
 		"rowid":  3,
-		"name":  "Todd",
+		"name":  "Bill",
 		"country":  "France",
 		"city":  "Paris",
 		"start_date_traveled":  "09/02/01",
