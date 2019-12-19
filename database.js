@@ -6,7 +6,8 @@ let database = new sqlite3.Database('./database.db');
 // Create variable for the SQL statement
 const createPeopleQuery = 
 `CREATE TABLE IF NOT EXISTS tblPeople (
-	name TEXT, 
+	firstName TEXT,
+	lastName TEXT, 
 	date_of_birth TEXT)`;
 
 const createLocationsQuery = 

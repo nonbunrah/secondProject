@@ -6,10 +6,19 @@ app.use(express.json());
 
 const port = 3000;
 
+// CORS stuff
+app.use(function(req, res, next) {
+ 	res.header("Access-Control-Allow-Origin", "*");
+ 	res.header("Access-Control-Allow-Methods", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	next();
+});
+
 //Routes
 app.get('/', (req, res) => {
-	response.send('Visit /api/people or /api/locations to see info');
+	res.send('Visit /api/people or /api/locations to see info');
 });
+
 // -------------------------------------------------------------------
 // PERSON ROUTES
 // -------------------------------------------------------------------
@@ -30,9 +39,9 @@ app.get('/api/people', (req, res) => {
 // Get one person
 app.get('/api/people/:id', (req, res) => {
 	const personId = req.params.id
-	const getPerson = `SELECT * FROM tblPeople WHERE tblPeople.oid = ?`;
+	const getPerson = `SELECT oid, * FROM tblPeople WHERE tblPeople.oid = ?`;
 
-	database.all(getPerson, [personId], (error, results) => {
+	database.get(getPerson, [personId], (error, results) => {
 		if (error) {
 			console.log(new Error('Could not get book'), error);
 			res.sendStatus(500);
@@ -43,15 +52,15 @@ app.get('/api/people/:id', (req, res) => {
 
 // Create new person
 app.post('/api/people', (req, res) => {
-	const reqBody = [req.body.name, req.body.date_of_birth]
-	const createNewPerson = "INSERT INTO tblPeople VALUES (?, ?)"
-
+	const reqBody = [req.body.firstName, req.body.lastName, req.body.dob]
+	const createNewPerson = "INSERT INTO tblPeople VALUES (?, ?, ?)"
+	console.log(req.body)
 	database.run(createNewPerson, reqBody,(error, results) => {
 		if (error) {
-			console.log(`Error adding new person ${req.body.name}`)
+			console.log(`Error adding new person ${req.body.firstName}`, error)
 			res.sendStatus(500)
 		} else {
-			console.log(`Added new person ${req.body.name}`)
+			console.log(`Added new person ${req.body.firstName}`)
 			res.sendStatus(200)
 		}
 	})
@@ -79,14 +88,22 @@ app.put('/api/people/:id', (req, res) => {
 app.delete('/api/people/:id', (req, res) => {
 	const personId = req.params.id
 	const getPerson = `DELETE FROM tblPeople WHERE tblPeople.oid = ?`;
-
+	const deletePlaceTraveled = `DELETE FROM tblTraveled WHERE tblTraveled.people_ID = ?`
 	database.all(getPerson, [personId], (error, results) => {
 		if (error) {
 			console.log(new Error('Could not delete person'), error);
 			res.sendStatus(500)
 		}
-			console.log("Person was successfully deleted")
-			res.status(200).json({message: "Delete successfully!"});
+		console.log("Person was successfully deleted")
+			
+		database.all(deletePlaceTraveled, [personId], (error, results) => {
+			if (error) {
+				console.log(new Error('Could not delete place traveled'), error);
+				res.sendStatus(500)
+			}
+			console.log("Place traveled was successfully deleted")
+			res.status(200).json({message: "Delete successful!"});
+		})
 	})
 });
 

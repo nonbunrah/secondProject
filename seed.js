@@ -2,24 +2,29 @@ const db = require('./database.js');
 
 const people_list = [
 {
-	name: "RJ",
+	firstName: "RJ",
+  lastName: "Bamrah",
 	date_of_birth: "1/1/01"
 },
 {
-	name: "Felipe",
+	firstName: "Felipe",
+  lastName: "Gonzalez",
 	date_of_birth: null
 },
 {
-	name: "Mallory",
+	firstName: "Mallory",
+  lastName: "Lemieux",
 	date_of_birth: null
 },
 {
-	name: "Todd",
+	firstName: "Glad",
+  lastName: "Toddfelter",
 	date_of_birth: null
 },
 {
-	name: "Jason",
-	date_of_birth: "4/20/89"
+	firstName: "Jason",
+  lastName: "Serafica",
+	date_of_birth: "4/20/69"
 }
 ];
 
